@@ -75,32 +75,84 @@ int main() {
                     scanf("%d", &carta2);
                     
                     if (carta1 >= 0 && carta1 < numCartas && carta2 >= 0 && carta2 < numCartas && carta1 != carta2) {
-                        printf("\nEscolha o atributo para comparação:\n");
-                        printf("1. População\n");
-                        printf("2. Área\n");
-                        printf("3. PIB\n");
-                        printf("4. Pontos Turísticos\n");
-                        printf("5. Densidade Populacional\n");
-                        printf("6. PIB per capita\n");
+                        int tipoComparacao;
+                        printf("\nEscolha o TIPO de comparação:\n");
+                        printf("1. Comparar por UM atributo\n");
+                        printf("2. Comparar por DOIS atributos\n");
                         printf("Opção: ");
-                        scanf("%d", &atributo);
-                        
-                        if (atributo >= 1 && atributo <= 6) {
-                            resultado = compararCartas(&cartas[carta1], &cartas[carta2], atributo);
+                        scanf("%d", &tipoComparacao);
+
+                        if (tipoComparacao == 1) {
+                            printf("\nEscolha o atributo para comparação:\n");
+                            printf("1. População\n");
+                            printf("2. Área\n");
+                            printf("3. PIB\n");
+                            printf("4. Pontos Turísticos\n");
+                            printf("5. Densidade Populacional\n");
+                            printf("6. PIB per capita\n");
+                            printf("Opção: ");
+                            scanf("%d", &atributo);
                             
-                            printf("\n🆚 RESULTADO DA COMPARAÇÃO 🆚\n");
-                            printf("Carta 1: %s (%s)\n", cartas[carta1].nome, cartas[carta1].codigo);
-                            printf("Carta 2: %s (%s)\n", cartas[carta2].nome, cartas[carta2].codigo);
-                            
-                            if (resultado > 0) {
-                                printf("🏆 Vencedor: %s!\n", cartas[carta1].nome);
-                            } else if (resultado < 0) {
-                                printf("🏆 Vencedor: %s!\n", cartas[carta2].nome);
+                            if (atributo >= 1 && atributo <= 6) {
+                                resultado = compararCartas(&cartas[carta1], &cartas[carta2], atributo);
+                                
+                                printf("\n🆚 RESULTADO DA COMPARAÇÃO 🆚\n");
+                                printf("Carta 1: %s (%s)\n", cartas[carta1].nome, cartas[carta1].codigo);
+                                printf("Carta 2: %s (%s)\n", cartas[carta2].nome, cartas[carta2].codigo);
+                                
+                                if (resultado > 0) {
+                                    printf("🏆 Vencedor: %s!\n", cartas[carta1].nome);
+                                } else if (resultado < 0) {
+                                    printf("🏆 Vencedor: %s!\n", cartas[carta2].nome);
+                                } else {
+                                    printf("🤝 Empate!\n");
+                                }
                             } else {
-                                printf("🤝 Empate!\n");
+                                printf("\n❌ Atributo inválido!\n");
+                            }
+                        } else if (tipoComparacao == 2) {
+                            int atributoEscolhido1, atributoEscolhido2;
+                            printf("\nEscolha o PRIMEIRO atributo para comparação:\n");
+                            printf("1. População\n");
+                            printf("2. Área\n");
+                            printf("3. PIB\n");
+                            printf("4. Pontos Turísticos\n");
+                            printf("5. Densidade Populacional\n");
+                            printf("6. PIB per capita\n");
+                            printf("Opção: ");
+                            scanf("%d", &atributoEscolhido1);
+
+                            printf("\nEscolha o SEGUNDO atributo para comparação (diferente do primeiro):\n");
+                            printf("1. População\n");
+                            printf("2. Área\n");
+                            printf("3. PIB\n");
+                            printf("4. Pontos Turísticos\n");
+                            printf("5. Densidade Populacional\n");
+                            printf("6. PIB per capita\n");
+                            printf("Opção: ");
+                            scanf("%d", &atributoEscolhido2);
+
+                            if (atributoEscolhido1 >= 1 && atributoEscolhido1 <= 6 &&
+                                atributoEscolhido2 >= 1 && atributoEscolhido2 <= 6 &&
+                                atributoEscolhido1 != atributoEscolhido2) {
+                                
+                                // A chamada para a função de comparação de dois atributos será implementada aqui.
+                                // Ex: resultado = compararCartasDoisAtributos(&cartas[carta1], &cartas[carta2], atributoEscolhido1, atributoEscolhido2);
+                                
+                                printf("\n🆚 RESULTADO DA COMPARAÇÃO POR DOIS ATRIBUTOS 🆚\n");
+                                printf("Carta 1: %s (%s)\n", cartas[carta1].nome, cartas[carta1].codigo);
+                                printf("Carta 2: %s (%s)\n", cartas[carta2].nome, cartas[carta2].codigo);
+                                printf("Atributos escolhidos para comparação: %d e %d\n", atributoEscolhido1, atributoEscolhido2);
+                                
+                                // A lógica detalhada de quem vence e a exibição do resultado para dois atributos
+                                // será implementada em cartas.c e integrada aqui posteriormente.
+                                printf("\n🚧 Lógica de comparação e exibição do vencedor para dois atributos ainda em desenvolvimento.\n");
+
+                            } else {
+                                printf("\n❌ Escolha de atributos inválida (devem ser entre 1 e 6 e diferentes entre si)!\n");
                             }
                         } else {
-                            printf("\n❌ Atributo inválido!\n");
+                            printf("\n❌ Tipo de comparação inválido!\n");
                         }
                     } else {
                         printf("\n❌ Índices inválidos ou iguais!\n");
