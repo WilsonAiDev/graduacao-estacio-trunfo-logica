@@ -136,17 +136,21 @@ int main() {
                                 atributoEscolhido2 >= 1 && atributoEscolhido2 <= 6 &&
                                 atributoEscolhido1 != atributoEscolhido2) {
                                 
-                                // A chamada para a função de comparação de dois atributos será implementada aqui.
-                                // Ex: resultado = compararCartasDoisAtributos(&cartas[carta1], &cartas[carta2], atributoEscolhido1, atributoEscolhido2);
+                                resultado = compararCartasDoisAtributos(&cartas[carta1], &cartas[carta2], atributoEscolhido1, atributoEscolhido2);
                                 
                                 printf("\n🆚 RESULTADO DA COMPARAÇÃO POR DOIS ATRIBUTOS 🆚\n");
                                 printf("Carta 1: %s (%s)\n", cartas[carta1].nome, cartas[carta1].codigo);
                                 printf("Carta 2: %s (%s)\n", cartas[carta2].nome, cartas[carta2].codigo);
-                                printf("Atributos escolhidos para comparação: %d e %d\n", atributoEscolhido1, atributoEscolhido2);
-                                
-                                // A lógica detalhada de quem vence e a exibição do resultado para dois atributos
-                                // será implementada em cartas.c e integrada aqui posteriormente.
-                                printf("\n🚧 Lógica de comparação e exibição do vencedor para dois atributos ainda em desenvolvimento.\n");
+                                // Exibir os nomes dos atributos pode ser uma melhoria futura
+                                printf("Atributos comparados.\n"); 
+
+                                if (resultado > 0) {
+                                    printf("🏆 Vencedor: %s!\n", cartas[carta1].nome);
+                                } else if (resultado < 0) {
+                                    printf("🏆 Vencedor: %s!\n", cartas[carta2].nome);
+                                } else {
+                                    printf("🤝 Empate na comparação por dois atributos!\n");
+                                }
 
                             } else {
                                 printf("\n❌ Escolha de atributos inválida (devem ser entre 1 e 6 e diferentes entre si)!\n");

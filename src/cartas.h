@@ -21,6 +21,7 @@ void cadastrarCarta(Carta *carta);
 void exibirCarta(const Carta *carta);
 void calcularPropriedades(Carta *carta);
 int compararCartas(const Carta *carta1, const Carta *carta2, int atributo);
+int compararCartasDoisAtributos(const Carta *carta1, const Carta *carta2, int atributo1, int atributo2);
 void exibirMenu();
 
 // Constantes para comparação

@@ -117,6 +117,38 @@ int compararCartas(const Carta *carta1, const Carta *carta2, int atributo) {
 }
 
 /**
+ * Função para comparar duas cartas por dois atributos específicos
+ * Retorna: 1 se carta1 tiver mais atributos vencedores, -1 se carta2 tiver mais, 0 se empate.
+ */
+int compararCartasDoisAtributos(const Carta *carta1, const Carta *carta2, int atributo1, int atributo2) {
+    int vitorias_carta1 = 0;
+    int vitorias_carta2 = 0;
+
+    // Compara o primeiro atributo
+    int resultado_atributo1 = compararCartas(carta1, carta2, atributo1);
+    if (resultado_atributo1 > 0) {
+        vitorias_carta1++;
+    } else if (resultado_atributo1 < 0) {
+        vitorias_carta2++;
+    }
+
+    // Compara o segundo atributo
+    int resultado_atributo2 = compararCartas(carta1, carta2, atributo2);
+    if (resultado_atributo2 > 0) {
+        vitorias_carta1++;
+    } else if (resultado_atributo2 < 0) {
+        vitorias_carta2++;
+    }
+
+    // Determina o vencedor com base no número de atributos ganhos
+    // Operador ternário para determinar o resultado final
+    return (vitorias_carta1 > vitorias_carta2) ? 1 :
+           (vitorias_carta2 > vitorias_carta1) ? -1 :
+           0; // Empate se o número de vitórias for igual
+}
+
+
+/**
  * Função para exibir o menu principal
  */
 void exibirMenu() {
