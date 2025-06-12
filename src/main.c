@@ -165,6 +165,7 @@ int main() {
                 break;
                 
             case 4: // Sair
+                salvarCartasCSV(cartas, numCartas, "cartas.csv"); // Salva as cartas antes de sair
                 printf("\n👋 Obrigado por jogar Super Trunfo de Países!\n");
                 printf("Projeto desenvolvido por Wilson Oliveira\n");
                 break;

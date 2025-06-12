@@ -23,6 +23,8 @@ void calcularPropriedades(Carta *carta);
 int compararCartas(const Carta *carta1, const Carta *carta2, int atributo);
 int compararCartasDoisAtributos(const Carta *carta1, const Carta *carta2, int atributo1, int atributo2);
 void exibirMenu();
+int carregarCartasCSV(Carta cartas[], int maxCartas, const char *nomeArquivo); // Protótipo adicionado anteriormente
+void salvarCartasCSV(Carta cartas[], int numCartas, const char *nomeArquivo);
 
 // Constantes para comparação
 #define ATRIBUTO_POPULACAO 1

@@ -162,3 +162,29 @@ void exibirMenu() {
     printf("╚════════════════════════════════════════════╝\n");
     printf("Escolha uma opção: ");
 }
+
+/**
+ * Função para salvar as cartas atuais no arquivo CSV.
+ * Sobrescreve o arquivo existente.
+ */
+void salvarCartasCSV(Carta cartas[], int numCartas, const char *nomeArquivo) {
+    FILE *arquivo = fopen(nomeArquivo, "w"); // Abre em modo de escrita (sobrescreve)
+    if (arquivo == NULL) {
+        perror("Erro ao abrir o arquivo CSV para escrita");
+        return;
+    }
+
+    for (int i = 0; i < numCartas; i++) {
+        fprintf(arquivo, "%s,%s,%s,%d,%.2f,%.2f,%d\n",
+                cartas[i].estado,
+                cartas[i].codigo,
+                cartas[i].nome,
+                cartas[i].populacao,
+                cartas[i].area,
+                cartas[i].pib,
+                cartas[i].pontos_turisticos);
+    }
+
+    fclose(arquivo);
+    printf("\n💾 Cartas salvas com sucesso em %s!\n", nomeArquivo);
+}
