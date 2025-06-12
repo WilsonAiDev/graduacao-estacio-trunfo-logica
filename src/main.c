@@ -14,10 +14,11 @@
 int main() {
     // Array para armazenar as cartas (máximo 10 cartas para este exemplo)
     Carta cartas[10];
-    int numCartas = 0;
+    int numCartas = 0; // Inicializa com 0
     int opcao, indice, atributo, resultado;
     int carta1, carta2;
-    
+
+    // Exibe o banner de boas-vindas primeiro
     printf("╔════════════════════════════════════════════╗\n");
     printf("║     BEM-VINDO AO SUPER TRUNFO DE PAÍSES!   ║\n");
     printf("║                                            ║\n");
@@ -25,6 +26,10 @@ int main() {
     printf("║  Disciplina: Introdução à Programação      ║\n");
     printf("║  Desenvolvido por: Wilson Oliveira         ║\n");
     printf("╚════════════════════════════════════════════╝\n");
+
+    // Tenta carregar as cartas do CSV
+    // A constante 10 é o tamanho máximo do array 'cartas'
+    numCartas = carregarCartasCSV(cartas, 10, "cartas.csv");
     
     do {
         exibirMenu();

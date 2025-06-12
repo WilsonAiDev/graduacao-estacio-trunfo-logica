@@ -71,7 +71,7 @@ void exibirCarta(const Carta *carta) {
     printf("│ Pontos Turísticos: %17d    │\n", carta->pontos_turisticos);
     printf("├─────────────────────────────────────────┤\n");
     printf("│ Densidade Pop.: %16.2f hab/km²│\n", carta->densidade_populacional);
-    printf("│ PIB per capita: %16.2f R$    │\n", carta->pib_per_capita);
+    printf("│ PIB per capita: %16.2f R$     │\n", carta->pib_per_capita);
     printf("└─────────────────────────────────────────┘\n");
 }
 
@@ -152,7 +152,8 @@ int compararCartasDoisAtributos(const Carta *carta1, const Carta *carta2, int at
  * Função para exibir o menu principal
  */
 void exibirMenu() {
-    printf("\n╔════════════════════════════════════════════╗\n");
+    printf("\n");
+    printf("╔════════════════════════════════════════════╗\n");
     printf("║          SUPER TRUNFO DE PAÍSES            ║\n");
     printf("╠════════════════════════════════════════════╣\n");
     printf("║  1. Cadastrar nova carta                   ║\n");
@@ -162,6 +163,53 @@ void exibirMenu() {
     printf("╚════════════════════════════════════════════╝\n");
     printf("Escolha uma opção: ");
 }
+
+/**
+ * Função para carregar cartas de um arquivo CSV.
+ * Retorna o número de cartas carregadas.
+ */
+int carregarCartasCSV(Carta cartas[], int maxCartas, const char *nomeArquivo) {
+    FILE *arquivo = fopen(nomeArquivo, "r");
+    int numCartasCarregadas = 0; // Declarar no início da função
+    char linha[256]; // Buffer para ler cada linha
+
+    if (arquivo == NULL) {
+        // perror("Info: Não foi possível abrir o arquivo CSV para leitura. Iniciando com 0 cartas.");
+        printf("\nℹ️ Arquivo %s não encontrado ou não pôde ser aberto. Nenhuma carta carregada do CSV.\n", nomeArquivo); // Corrigido: removido \ antes de "
+        return 0; // Retorna 0 se o arquivo não puder ser aberto
+    }
+
+    while (fgets(linha, sizeof(linha), arquivo) && numCartasCarregadas < maxCartas) {
+        // Tenta parsear a linha usando sscanf
+        // Formato: estado,codigo,nome,populacao,area,pib,pontos_turisticos
+        int camposLidos = sscanf(linha, "%2[^,],%3[^,],%49[^,],%d,%f,%f,%d",
+                                 cartas[numCartasCarregadas].estado,
+                                 cartas[numCartasCarregadas].codigo,
+                                 cartas[numCartasCarregadas].nome,
+                                 &cartas[numCartasCarregadas].populacao,
+                                 &cartas[numCartasCarregadas].area,
+                                 &cartas[numCartasCarregadas].pib,
+                                 &cartas[numCartasCarregadas].pontos_turisticos);
+
+        if (camposLidos == 7) { // Verifica se todos os 7 campos foram lidos corretamente
+            // Remove o newline do nome, se houver (fgets pode capturá-lo)
+            cartas[numCartasCarregadas].nome[strcspn(cartas[numCartasCarregadas].nome, "\n")] = 0; // Corrigido: removido \ antes de "
+            
+            calcularPropriedades(&cartas[numCartasCarregadas]);
+            numCartasCarregadas++;
+        } else {
+            // Poderia adicionar um log de erro para linhas mal formatadas
+            // printf("Aviso: Linha mal formatada no CSV ignorada: %s", linha);
+        }
+    } // Fechamento do while
+
+    fclose(arquivo);
+    if (numCartasCarregadas > 0) {
+        printf("\n✅ %d carta(s) carregada(s) com sucesso do arquivo %s!\n", numCartasCarregadas, nomeArquivo); // Corrigido: removido \ antes de "
+    }
+    return numCartasCarregadas;
+} // Fechamento da função carregarCartasCSV
+
 
 /**
  * Função para salvar as cartas atuais no arquivo CSV.
