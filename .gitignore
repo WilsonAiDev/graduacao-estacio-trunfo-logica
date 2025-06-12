@@ -1,0 +1,39 @@
+# Executáveis
+super_trunfo
+*.exe
+*.out
+*.app
+
+# Arquivos objeto
+*.o
+*.obj
+obj/
+
+# Arquivos de debug
+*.dSYM/
+*.pdb
+
+# Diretórios de compilação C
+*.dSYM/
+obj/
+bin/
+debug/
+release/
+
+# Arquivos temporários do sistema
+.DS_Store
+Thumbs.db
+
+# Arquivos de IDE/Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Arquivos de build
+build/
+dist/
+
+# Arquivos de log
+*.log
